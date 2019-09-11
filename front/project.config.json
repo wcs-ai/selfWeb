@@ -1,0 +1,60 @@
+{
+	"description": "项目配置文件。",
+  "enablePullDownRefresh": true,
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+    "enablePullDownRefresh": true
+	},
+	"miniprogramRoot": "dist/",
+	"compileType": "miniprogram",
+	"appid": "wx9cd2ec309dd7de65",
+	"projectname": "wxH52",
+	"scripts": {
+		"beforeCompile": "npm run dev",
+		"beforePreview": "",
+		"beforeUpload": ""
+	},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "mpvue编辑",
+					"pathName": "pages/home/main",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "okk",
+					"pathName": "pages/self/main",
+					"query": ""
+				}
+			]
+		}
+	}
+}
