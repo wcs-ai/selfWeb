@@ -63,7 +63,8 @@ Vue.mixin({
         h:45
       },
       router:'/',
-      nav_index:0
+      nav_index:0,
+      env:'pc'
     }
   },
   methods: {
@@ -169,6 +170,7 @@ Vue.mixin({
       },
       request:Fly,
     dra_bt_nav(){
+        //draw nav of bottom in canvas
         var can = document.getElementById('ph-bt-canvas');
         var ctx = can.getContext('2d');
         ctx.beginPath();
@@ -179,17 +181,26 @@ Vue.mixin({
         ctx.quadraticCurveTo(this.bt_canvas.w*0.97,0,this.bt_canvas.w,this.bt_canvas.h);
         ctx.closePath();
         ctx.fill();
+    },
+    alter_size(number){
+        //按照比例转化尺寸大小，pc,ph
+      if(this.env==='pc'){return number;}
+      else{
+        return (this.ww*number)/375;
+      }
     }
   },
   created () {
       this.service = httpService;
+      //获取屏幕尺寸，环境
       this.ww = window.innerWidth;
       this.wh = window.innerHeight;
       this.bt_canvas.w = this.ww;
+      this.env = this.ww>768 ? 'pc' : 'ph';
+      //DOM元素加载完成后进入绘制事件
       document.addEventListener('DOMContentLoaded',()=>{
         this.dra_bt_nav();
       });
-
       //判断是否在微信打开
       if(ua.match(/MicroMessenger/i) == "micromessenger"){
         this.in_wx = true;

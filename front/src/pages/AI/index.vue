@@ -1,12 +1,19 @@
 <template>
   <div id="AI-all">
-      这里是ai
+      <ul class="ai-list">
+        <li class="ai-item row">
+          <div class="head row-left">
+            <svg class="svg"></svg>
+          </div>
+          <div class="content row-left">
+            <h3 class="title">盲目搜索之九拼图</h3>
+            <p class="descript">盲目搜索的运用。</p>
+          </div>
+        </li>
+      </ul>
   </div>
 </template>
 <script>
-
-
-  var thisPage = false;
 
   export default {
     data(){
@@ -16,18 +23,17 @@
     },
     methods:{
 
-
     },
     components:{
 
     },
-    created() {
+    created(){
 
     },
     onLoad(){
 
     },
-    mounted () {
+    mounted(){
 
     }
   }
@@ -42,4 +48,25 @@
   @f_dgray:#cdcdcd;
   @size:18.75rem;
 
+  #AI-all{
+    position: relative;
+    >.ai-list{
+      position: relative;
+      width: 100%;
+      >.ai-item{
+        width: 520px;
+        margin: 20px auto;
+        >.head{
+          width: 20%;
+          height: 150px;
+        }
+        >.content{
+          width: 80%;
+          height: 150px;
+          padding: 10px;
+          background: #000;
+        }
+      }
+    }
+  }
 </style>

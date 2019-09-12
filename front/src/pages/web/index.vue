@@ -9,13 +9,16 @@
           <div class="text"><p class="cont">文章描述</p></div>
           <p class="time">2019-10-1</p>
         </div>
-        <div class="right circle"></div>
+        <p class="left-origin"></p>
+        <div class="right circle" @click="frontAnimate(0)">svg</div>
       </li>
     </ol>
   </div>
 </template>
 
 <script>
+
+import $ from '../../utils/jquery.min'
 export default {
   data () {
     return {
@@ -26,15 +29,33 @@ export default {
 
   },
   methods: {
+    frontAnimate(ord){
+      var item = $(".web-item").eq(ord);
+      var item_cont = item.children(".content").eq(0);
+      item.animate({width:520},500);
+      item_cont.animate({width:400},500);
+      setTimeout(()=>{
+        item_cont.find('.cont').eq(0).animate({left:130,opacity:1},300);
+        item_cont.find('.cont').eq(1).animate({left:160,opacity:1},300);
+      },300);
+      setTimeout(()=>{
+        item_cont.find('.time').eq(0).animate({right:50},400);
+        item_cont.find('.cont').eq(0).animate({left:100,opacity:1},500);
+        item_cont.find('.cont').eq(1).animate({left:130,opacity:1},500);
+      },600);
+    },
+    backAnimate(ord){
 
+    }
   },
   created () {
 
   },
   mounted () {
-
+   // this.frontAnimate(0);
   }
 }
+
 </script>
 
 <style lang="less">
@@ -45,39 +66,28 @@ export default {
 #web-all{
   position: relative;
   width: 100%;
+  padding-left: 150px;
   >.web-article{
     position: relative;
     width: 100%;
-    margin-left: 150px;
     >.web-item{
       position: relative;
-      width: 520px;
+      width: 220px;
       height: 110px;
       margin: 50px;
       >.content{
         position: relative;
-        width: 75%;
+        width: 110px;
         height: 110px;
         left: 55px;
         border-bottom: 10px solid @blue1;
         z-index: 5;
         >.shape{
           position: absolute;
-          width: 50px;
+          width: 70px;
           height:100%;
           background: @blue2;
-          &:before{
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: white;
-            left: -35px;
-            top: 15px;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-          }
+          z-index: 120;
           &:after{
             content: '';
             position: absolute;
@@ -97,11 +107,12 @@ export default {
             font-size: 16px;
             color: white;
             padding: 2px 15px;
-            left: 100px;
+            left: 0;
             background: @blue2;
             -webkit-border-radius: 15px;
             -moz-border-radius: 15px;
             border-radius: 15px;
+            opacity: 0;
           }
         }
         >.text{
@@ -113,11 +124,12 @@ export default {
             font-size: 14px;
             color: white;
             padding: 2px 15px;
-            left: 120px;
+            left: 0;
             background: @blue2;
             -webkit-border-radius: 15px;
             -moz-border-radius: 15px;
             border-radius: 15px;
+            opacity: 0;
           }
         }
         >.time{
@@ -130,7 +142,7 @@ export default {
           -moz-border-radius: 15px;
           border-radius: 15px;
           bottom: 5px;
-          right: 10%;
+          right: 0;
         }
       }
       >.circle{
@@ -142,6 +154,10 @@ export default {
         border-radius: 50%;
         background: @blue2;
         border: 10px solid @blue1;
+        text-align: center;
+        line-height:90px;
+        font-size: 16px;
+        color: white;
       }
       >.left{
         left: 0;
@@ -152,6 +168,16 @@ export default {
         right: 0;
         top: 0;
         z-index: 18;
+      }
+      >.left-origin{
+        position: absolute;
+        height: 80px;
+        width: 80px;
+        background: white;
+        border-radius: 50%;
+        left: 15px;
+        top: 15px;
+        z-index: 50;
       }
     }
   }
