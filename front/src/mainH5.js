@@ -10,6 +10,7 @@ import httpService from './api/httpService'
 import store from './store'
 import Fly from './utils/ajax'
 import urls from './utils/url_'
+import objItem from './utils/webAndAI'
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
@@ -51,10 +52,14 @@ Vue.use(Vuex);
 Vue.mixin({
   data () {
     return {
+      webList:objItem.webs,
+      AIList:objItem.AIs,
       image:urls['img'],
-      //窗口尺寸
+      //窗口尺寸,设备尺寸
       ww:0,
       wh:0,
+      sw:0,
+      sh:0,
       //用户标识
       user_toke:'',
       user_id:'',
@@ -195,6 +200,8 @@ Vue.mixin({
       //获取屏幕尺寸，环境
       this.ww = window.innerWidth;
       this.wh = window.innerHeight;
+      this.sw = window.screen.width;
+      this.sh = window.screen.height;
       this.bt_canvas.w = this.ww;
       this.env = this.ww>768 ? 'pc' : 'ph';
       //DOM元素加载完成后进入绘制事件
@@ -207,7 +214,6 @@ Vue.mixin({
       }
   }
 });
-
 Vue.prototype.$url = urls['urls'];
 
 /* eslint-disable no-new */

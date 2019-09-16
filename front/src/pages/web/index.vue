@@ -1,16 +1,16 @@
 <template>
-  <div id="web-all">
+  <div id="web-all" :style="{height:ch+'px'}" @scroll="check_view()">
     <ol class="web-article">
-      <li class="web-item">
+      <li class="web-item" v-for="(web,index) in webList">
         <div class="left circle"></div>
         <div class="content">
           <p class="shape"></p>
-          <h3 class="title"><p class="cont">标题</p></h3>
-          <div class="text"><p class="cont">文章描述</p></div>
-          <p class="time">2019-10-1</p>
+          <h3 class="title"><p class="cont">{{ web.title }}</p></h3>
+          <div class="text"><p class="cont">{{ web.descript }}</p></div>
+          <p class="time">{{ web.time }}</p>
         </div>
         <p class="left-origin"></p>
-        <div class="right circle" @click="frontAnimate(0)">svg</div>
+        <div class="right circle" @click="frontAnimate(index)">svg</div>
       </li>
     </ol>
   </div>
@@ -22,7 +22,8 @@ import $ from '../../utils/jquery.min'
 export default {
   data () {
     return {
-
+      ch:700,
+      st_ord:-1
     }
   },
   components: {
@@ -32,17 +33,60 @@ export default {
     frontAnimate(ord){
       var item = $(".web-item").eq(ord);
       var item_cont = item.children(".content").eq(0);
-      item.animate({width:520},500);
-      item_cont.animate({width:400},500);
+      var w1,w2,lef1,lef2,lef3,lef4,rg1;
+      if(this.env==='pc'){
+        w1 = 520;
+        w2 = 410;
+        lef1 = 130;
+        lef2 = 160;
+        lef3 = 95;
+        lef4 = 120;
+        rg1 = 50;
+      }
+      else{
+        w1 = this.ww*0.96;
+        w2 = w1 - (this.ww*77)/375;
+        lef1 = (this.ww*100)/375;
+        lef2 = (this.ww*130)/375;
+        lef3 = (this.ww*65)/375;
+        lef4 = (this.ww*85)/375;
+        rg1 = (this.ww*40)/375;
+      }
+      item.animate({width:w1},500);
+      item_cont.animate({width:w2},500);
       setTimeout(()=>{
-        item_cont.find('.cont').eq(0).animate({left:130,opacity:1},300);
-        item_cont.find('.cont').eq(1).animate({left:160,opacity:1},300);
+        item_cont.find('.cont').eq(0).animate({left:lef1,opacity:1},300);
+        item_cont.find('.cont').eq(1).animate({left:lef2,opacity:1},300);
       },300);
       setTimeout(()=>{
-        item_cont.find('.time').eq(0).animate({right:50},400);
-        item_cont.find('.cont').eq(0).animate({left:100,opacity:1},500);
-        item_cont.find('.cont').eq(1).animate({left:130,opacity:1},500);
+        item_cont.find('.time').eq(0).animate({right:rg1},400);
+        item_cont.find('.cont').eq(0).animate({left:lef3,opacity:1},500);
+        item_cont.find('.cont').eq(1).animate({left:lef4,opacity:1},500);
       },600);
+    },
+    check_view(){
+      var its = document.getElementsByClassName("web-item");
+      var el_arr = [],i = 0;
+      var wa = document.getElementById("web-all").scrollTop;
+      for(var e of its){
+        if(i>this.st_ord){
+          if(e.offsetTop<(this.ch+wa-50)){
+            el_arr.push(e);
+          }
+        }
+        else{return;}
+        i += 1;
+      }
+      this.st_ord = i;
+      this.start_quee(el_arr);
+    },
+    start_quee(els){
+      //队列动画开始
+      els.forEach((item,index)=>{
+        setTimeout(()=>{
+          this.frontAnimate(index);
+        },index*100);
+      });
     },
     backAnimate(ord){
 
@@ -52,7 +96,13 @@ export default {
 
   },
   mounted () {
-   // this.frontAnimate(0);
+    if(this.env==='pc'){
+      this.ch = this.sh - 170;
+    }
+    else{
+      this.ch = this.sh;
+    }
+    this.check_view();
   }
 }
 
@@ -66,15 +116,18 @@ export default {
 #web-all{
   position: relative;
   width: 100%;
-  padding-left: 150px;
+  padding:1px 150px 1px 150px;
+  overflow:scroll;
   >.web-article{
     position: relative;
     width: 100%;
+    padding: 1px;
+    margin-left: 70px;
     >.web-item{
       position: relative;
       width: 220px;
       height: 110px;
-      margin: 50px;
+      margin: 70px 0;
       >.content{
         position: relative;
         width: 110px;
@@ -93,9 +146,9 @@ export default {
             position: absolute;
             height: 0;
             width: 0;
-            border-left: 100px solid @blue2;
+            border-left: 70px solid @blue2;
             border-top:100px solid transparent;
-            right: -100px;
+            right: -70px;
             top: 0;
           }
         }
@@ -106,42 +159,35 @@ export default {
             display: inline-block;
             font-size: 16px;
             color: white;
-            padding: 2px 15px;
+            padding: 1px 15px;
             left: 0;
             background: @blue2;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
+            border-bottom-left-radius: 15px;
             opacity: 0;
           }
         }
         >.text{
           position: relative;
-          margin-top: 5px;
+          margin-top: 3px;
           >.cont{
             position: relative;
             display: inline-block;
             font-size: 14px;
             color: white;
-            padding: 2px 15px;
+            padding: 1px 15px;
             left: 0;
             background: @blue2;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
+            border-bottom-left-radius: 15px;
             opacity: 0;
           }
         }
         >.time{
           position: absolute;
-          padding: 3px 16px;
+          padding: 1px 16px;
           font-size: 12px;
           color: white;
           background: @blue2;
-          -webkit-border-radius: 15px;
-          -moz-border-radius: 15px;
-          border-radius: 15px;
-          bottom: 5px;
+          bottom: 3px;
           right: 0;
         }
       }
@@ -182,4 +228,84 @@ export default {
     }
   }
 }
+
+  @media only screen and (min-width: 300px) and (max-width: 999px){
+    #web-all{
+      padding: 1px;
+      >.web-article{
+        margin-left: 0;
+        >.web-item {
+          width: 154/@size;
+          height: 77/@size;
+          margin: 50/@size 0;
+          left: 2%;
+          >.content{
+            width: 77/@size;
+            height: 77/@size;
+            left: 38/@size;
+            border-bottom: 5/@size solid @blue1;
+            >.shape{
+              width: 50/@size;
+              height:100%;
+              &:after{
+                content: '';
+                position: absolute;
+                height: 0;
+                width: 0;
+                border-left: 40/@size solid @blue2;
+                border-top:72/@size solid transparent;
+                right: -40/@size;
+                top: 0;
+              }
+            }
+            >.title{
+              >.cont{
+                font-size: 14/@size;
+                padding: 1px 10/@size;
+                font-weight: 500;
+                border-bottom-left-radius: 15/@size;
+              }
+            }
+            >.text{
+              margin-top: 3/@size;
+              >.cont{
+                font-size: 14/@size;
+                padding: 1px 10/@size;
+                line-height: 16/@size;
+                font-weight: 500;
+                max-width: 50%;
+                border-bottom-left-radius: 15/@size;
+              }
+            }
+            >.time{
+              display: none;
+              padding: 1px 10/@size;
+              font-size: 12/@size;
+              -webkit-border-radius: 15/@size;
+              -moz-border-radius: 15/@size;
+              border-radius: 15/@size;
+              bottom: 3/@size;
+            }
+          }
+          >.circle{
+            position: absolute;
+            width: 77/@size;
+            height: 77/@size;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            border: 5/@size solid @blue1;
+            line-height:50/@size;
+            font-size: 16/@size;
+          }
+          >.left-origin{
+            height: 56/@size;
+            width: 56/@size;
+            left: 10/@size;
+            top: 11/@size;
+          }
+        }
+      }
+    }
+  }
 </style>

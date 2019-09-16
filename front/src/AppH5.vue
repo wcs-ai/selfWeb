@@ -82,7 +82,9 @@
 	button{
 		outline: none;
 	}
-
+body{
+  background: @back1;
+}
 
   #app{
     position: relative;
@@ -90,7 +92,8 @@
       position: relative;
       width: 1000px;
       margin: 0 auto;
-      background: rgba(0,1,3,.5);
+      /*background: rgba(0,1,3,.5);*/
+      background: white;
       padding-top: 1px;
     }
   }
@@ -115,11 +118,12 @@
         }
       }
       >.here{
-        color:@purple;
+        color:orange;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 16px;
         //background: -webkit-linear-gradient(-30deg,#388eca 0%,#388eca 30%,#b2d6ef 60%,#388eca 100%);
-        background: @back2;
+        text-underline: white;
+        text-decoration: underline;
       }
     }
   }
@@ -185,7 +189,7 @@
       }
     }
   }
-  @media only screen and (min-width: 300px) and (max-width: 768px) {
+  @media only screen and (min-width: 300px) and (max-width: 999px) {
    #app{
      #view-content{width:100%;}
    }
