@@ -87,23 +87,25 @@ body{
 }
 
   #app{
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
     #view-content{
       position: relative;
       width: 1000px;
-      margin: 0 auto;
+      margin: 55px auto 0 auto;
       /*background: rgba(0,1,3,.5);*/
       background: white;
       padding-top: 1px;
+      padding-bottom: 20px;
     }
   }
   #pc-nav{
-    position: relative;
+    position: fixed;
     width: 100%;
     background: white;
-    margin-bottom: 15px;
+		z-index: 125;
+		left: 0;
+		top: 0;
     >.content{
       width: 1000px;
       margin: 0 auto;
@@ -122,7 +124,7 @@ body{
         }
       }
       >.here{
-        color:orange;
+        color:red;
         font-weight: 600;
         font-size: 16px;
         //background: -webkit-linear-gradient(-30deg,#388eca 0%,#388eca 30%,#b2d6ef 60%,#388eca 100%);

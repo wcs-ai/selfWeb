@@ -1,7 +1,7 @@
 <template>
   <div id="AI-all">
       <ul class="ai-list">
-        <li class="ai-item row">
+        <li class="ai-item row" @click="to_page('../pages/etcTime/main')">
           <div class="head row-left">
             <svg class="svg">
               <ellipse class="face_out" style="fill:#1f1d20;cx:104;cy:60;rx:65;ry:60;"/>

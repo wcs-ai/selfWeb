@@ -1,5 +1,5 @@
 <template>
-  <div id="web-all" :style="{height:ch+'px'}" @scroll="check_view()">
+  <div id="web-all" @scroll="check_view()">
     <ol class="web-article">
       <li class="web-item" v-for="(web,index) in webList">
         <div class="left circle"></div>
@@ -23,7 +23,8 @@ export default {
   data () {
     return {
       ch:700,
-      st_ord:-1
+      st_ord:0,
+      can_scroll:true
     }
   },
   components: {
@@ -34,6 +35,8 @@ export default {
       var item = $(".web-item").eq(ord);
       var item_cont = item.children(".content").eq(0);
       var w1,w2,lef1,lef2,lef3,lef4,rg1;
+      //记住加载到第几项
+      this.st_ord += 1;
       if(this.env==='pc'){
         w1 = 520;
         w2 = 410;
@@ -65,26 +68,25 @@ export default {
       },600);
     },
     check_view(){
+    	//检查哪些元素进入视图，加载动画
       var its = document.getElementsByClassName("web-item");
-      var el_arr = [],i = 0;
       var wa = document.getElementById("web-all").scrollTop;
-      for(var e of its){
-        if(i>this.st_ord){
-          if(e.offsetTop<(this.ch+wa-50)){
-            el_arr.push(e);
+			
+			for(var c=this.st_ord,el_arr=[];c<its.length;c++){
+      		if(its[c].offsetTop<(this.ch+wa-50)){
+      			el_arr.push(c);
           }
-        }
-        else{return;}
-        i += 1;
+      	if(c===its.length-1){
+      		this.start_quee(el_arr);
+      	}
       }
-      this.st_ord = i;
-      this.start_quee(el_arr);
+      
     },
     start_quee(els){
       //队列动画开始
       els.forEach((item,index)=>{
         setTimeout(()=>{
-          this.frontAnimate(index);
+          this.frontAnimate(item);
         },index*100);
       });
     },
@@ -118,7 +120,6 @@ export default {
   position: relative;
   width: 100%;
   padding:1px 150px 1px 150px;
-  overflow:scroll;
   >.web-article{
     position: relative;
     width: 100%;

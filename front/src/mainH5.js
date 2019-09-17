@@ -77,6 +77,8 @@ Vue.mixin({
       to_page(url_,show){
         //不关闭当前页的跳转/
         this.showNAV = show || false;
+       
+        //$("#pc-nav").css({display:'none'});
         this.$router.push('../'+url_);
       },
       navTo(url,idx){
