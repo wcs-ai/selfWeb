@@ -96,6 +96,7 @@ export default {
 
   },
   mounted () {
+    this.showNAV = true;
     if(this.env==='pc'){
       this.ch = this.sh - 170;
     }
@@ -189,6 +190,7 @@ export default {
           background: @blue2;
           bottom: 3px;
           right: 0;
+          border-top-right-radius: 10px;
         }
       }
       >.circle{

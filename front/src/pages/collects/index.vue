@@ -24,7 +24,7 @@
 
   },
   mounted () {
-
+    this.showNAV = true;
   }
 }
 </script>

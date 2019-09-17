@@ -2,7 +2,7 @@
   <!--将src文件下的pages>home>index.vue中template下的元素拿到这个页面的router-view中
   然后将index.vue中的css部分加入到这个页面的头部中-->
   <div id="app">
-    <div id="pc-nav">
+    <div id="pc-nav" v-if="showNAV==true">
       <div class="content row">
         <p class="nav-word el-w-5" :class="{here:nav_index==0}" @click="navTo('pages/home/main',0)">首页</p>
         <p class="nav-word el-w-5" :class="{here:nav_index==1}" @click="navTo('pages/web/main',1)">web</p>
@@ -14,7 +14,7 @@
     <div id="view-content">
       <router-view></router-view>
     </div>
-    <div id="ph-nav">
+    <div id="ph-nav" v-if="showNAV==true">
       <canvas id="ph-bt-canvas" :width="bt_canvas.w" :height="bt_canvas.h"></canvas>
       <ol class="content">
         <li class="nav-word el-w-5" :class="{here_style:nav_index==0}" @click="navTo('pages/home/main',0)"><p class="iconfont">&#xe602;</p><span>首页</span></li>
@@ -83,11 +83,13 @@
 		outline: none;
 	}
 body{
-  background: @back1;
+  background: deepskyblue;
 }
 
   #app{
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     #view-content{
       position: relative;
       width: 1000px;
@@ -100,21 +102,23 @@ body{
   #pc-nav{
     position: relative;
     width: 100%;
-
+    background: white;
+    margin-bottom: 15px;
     >.content{
       width: 1000px;
       margin: 0 auto;
-      background: @back1;
+
       >.nav-word{
         cursor: pointer;
         position: relative;
         text-align: center;
         font-size: 16px;
-        color: white;
-        height: 57px;
-        line-height: 57px;
+        color: black;
+        height: 40px;
+        line-height: 40px;
         &:hover{
-          background: @back2;
+          text-decoration: underline;
+          color: red;
         }
       }
       >.here{

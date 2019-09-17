@@ -55,6 +55,7 @@ Vue.mixin({
       webList:objItem.webs,
       AIList:objItem.AIs,
       image:urls['img'],
+      showNAV:true,
       //窗口尺寸,设备尺寸
       ww:0,
       wh:0,
@@ -73,8 +74,9 @@ Vue.mixin({
     }
   },
   methods: {
-      to_page(url_){
+      to_page(url_,show){
         //不关闭当前页的跳转/
+        this.showNAV = show || false;
         this.$router.push('../'+url_);
       },
       navTo(url,idx){

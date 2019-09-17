@@ -8,7 +8,7 @@ import heart from '../pages/heart/index.vue'
 import collects from '../pages/collects/index'
 import regis from '../pages/register/index'
 import pdetail from '../pages/pDetail/index'
-import front from '../pages/front/index'
+import etcTime from '../pages/extractTime/index'
 import submitForm from '../pages/submitForm/index'
 import web from '../pages/web/index'
 import app_share from '../pages/AppShare/index'
@@ -54,11 +54,11 @@ export default new Router({
     alias: '/pages/pDetail/main',
     meta:{title:'商品详情'}
   },{
-    path: '/front',
-    name: 'front',
-    component: front,
-    alias: '/pages/front/main',
-    meta:{title:'前端'}
+    path: '/etcTime',
+    name: 'etcTime',
+    component: etcTime,
+    alias: '/pages/etcTime/main',
+    meta:{title:'时间提取'}
   },{
     path: '/web',
     name: 'web',

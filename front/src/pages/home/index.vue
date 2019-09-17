@@ -43,7 +43,7 @@ export default {
   },
   mounted () {
     //web,wx初始化方法入口
-
+    this.showNAV = true;
   }
 }
 
