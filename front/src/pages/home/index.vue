@@ -2,7 +2,11 @@
   <!--一些标签不能使用,v-html不能用,不能使用href之类的跳转,不能用router-view,最外层必须用一个div元素包起来-->
   <div id="host-all">
       <div id="head">
-        科技，改变世界。
+        <div class="head-content">
+          <h3 class="super">[ super ]</h3>
+          <ul class="banner"><li>最近好友生日：李锦堰</li></ul>
+          <h2 class="word">奋斗--辉煌人生,科技--改变世界。</h2>
+        </div>
       </div>
       <div id="body">
         <h3 class="part-title">[ part ]</h3>
@@ -26,7 +30,6 @@ export default {
           description:'描述',
           time:'2019-09-13'
         }
-
       }
     },
     methods: {
@@ -43,7 +46,8 @@ export default {
   },
   mounted () {
     //web,wx初始化方法入口
-    this.showNAV = true;
+    $("#pc-nav").css({display:'block'});
+    $("#view-content").css({marginTop:'55px'});
   }
 }
 
@@ -62,8 +66,36 @@ export default {
     padding-bottom: 56px;
     #head{
       position: relative;
-      height: 300px;
       width: 100%;
+      >.head-content{
+        position: relative;
+        width: 650px;
+        margin: 0 auto;
+        >.super{
+          position: relative;
+          font-size: 18px;
+          padding: 15px 0;
+        }
+        >.banner{
+          position: relative;
+          height: 200px;
+          overflow: hidden;
+          >li{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            background: @black1;
+            color: white;
+            font-size: 16px;
+          }
+        }
+        >.word{
+          position: relative;
+          font-size: 18px;
+          padding: 15px 0;
+        }
+      }
     }
     #body{
       position: relative;
@@ -105,6 +137,26 @@ export default {
   @media only screen and (min-width: 300px) and (max-width: 768px) {
     #host-all{
       width: 100%;
+      #head{
+        >.head-content{
+          width: 90%;
+          >.super{
+            font-size: 16/@size;
+            padding: 10/@size 0;
+          }
+          >.banner{
+            height: 160/@size;
+            >li{
+              padding: 10/@size;
+              font-size: 14/@size;
+            }
+          }
+          >.word{
+            font-size: 16/@size;
+            padding: 10/@size 0;
+          }
+        }
+      }
       #body{
         width: 100%;
         >.part-title{

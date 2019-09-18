@@ -24,7 +24,8 @@
 
   },
   mounted () {
-    this.showNAV = true;
+    $("#pc-nav").css({display:'block'});
+    $("#view-content").css({marginTop:'55px'});
   }
 }
 </script>

@@ -98,7 +98,8 @@
     mounted(){
       //this.implement(0,0);
       //this.eye_animate(0);
-      this.showNAV = true;
+      $("#pc-nav").css({display:'block'});
+      $("#view-content").css({marginTop:'55px'});
       var av = new eye_animate(0,0);
     }
   }

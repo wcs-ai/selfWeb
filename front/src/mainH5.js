@@ -56,6 +56,7 @@ Vue.mixin({
       AIList:objItem.AIs,
       image:urls['img'],
       showNAV:true,
+      vch:700,
       //窗口尺寸,设备尺寸
       ww:0,
       wh:0,
@@ -77,8 +78,14 @@ Vue.mixin({
       to_page(url_,show){
         //不关闭当前页的跳转/
         this.showNAV = show || false;
-       
-        //$("#pc-nav").css({display:'none'});
+        if(this.showNAV===false){
+          $("#pc-nav").css({display:'none'});
+          $("#view-content").css({marginTop:'15px'});
+        }
+        else{
+          $("#pc-nav").css({display:'block'});
+          $("#view-content").css({marginTop:'55px'});
+        }
         this.$router.push('../'+url_);
       },
       navTo(url,idx){
@@ -208,6 +215,7 @@ Vue.mixin({
       this.sh = window.screen.height;
       this.bt_canvas.w = this.ww;
       this.env = this.ww>768 ? 'pc' : 'ph';
+      this.vch = this.sh - 166;
       //DOM元素加载完成后进入绘制事件
       document.addEventListener('DOMContentLoaded',()=>{
         this.dra_bt_nav();

@@ -11,7 +11,7 @@
         <p class="nav-word el-w-5" :class="{here:nav_index==4}" @click="navTo('pages/heart/main',4)">心灵世界</p>
       </div>
     </div>
-    <div id="view-content">
+    <div id="view-content" :style="{ minHeight:vch+'px' }">
       <router-view></router-view>
     </div>
     <div id="ph-nav" v-if="showNAV==true">

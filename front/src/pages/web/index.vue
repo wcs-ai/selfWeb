@@ -1,7 +1,7 @@
 <template>
-  <div id="web-all" @scroll="check_view()">
+  <div id="web-all">
     <ol class="web-article">
-      <li class="web-item" v-for="(web,index) in webList">
+      <li class="web-item" v-for="(web,index) in webList" @click="to_article()">
         <div class="left circle"></div>
         <div class="content">
           <p class="shape"></p>
@@ -71,7 +71,7 @@ export default {
     	//检查哪些元素进入视图，加载动画
       var its = document.getElementsByClassName("web-item");
       var wa = document.getElementById("web-all").scrollTop;
-			
+
 			for(var c=this.st_ord,el_arr=[];c<its.length;c++){
       		if(its[c].offsetTop<(this.ch+wa-50)){
       			el_arr.push(c);
@@ -80,7 +80,7 @@ export default {
       		this.start_quee(el_arr);
       	}
       }
-      
+
     },
     start_quee(els){
       //队列动画开始
@@ -90,6 +90,10 @@ export default {
         },index*100);
       });
     },
+    to_article(){
+      var host = window.location.host;
+
+    },
     backAnimate(ord){
 
     }
@@ -98,7 +102,10 @@ export default {
 
   },
   mounted () {
-    this.showNAV = true;
+    $("#pc-nav").css({display:'block'});
+    $("#view-content").css({marginTop:'55px'});
+    $(document.body).scroll(this.check_view);
+    this.nav_index = 1;
     if(this.env==='pc'){
       this.ch = this.sh - 170;
     }
