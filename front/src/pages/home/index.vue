@@ -46,8 +46,10 @@ export default {
   },
   mounted () {
     //web,wx初始化方法入口
-    $("#pc-nav").css({display:'block'});
-    $("#view-content").css({marginTop:'55px'});
+    if(this.env==='pc'){
+      $("#pc-nav").css({display:'block'});
+      $("#view-content").css({marginTop:'55px'});
+    }
   }
 }
 

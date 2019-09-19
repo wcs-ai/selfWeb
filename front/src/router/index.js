@@ -3,15 +3,10 @@ import Router from 'vue-router'
 
 import AI from '../pages/AI/index.vue'
 import home from '../pages/home/index.vue'
-
 import heart from '../pages/heart/index.vue'
 import collects from '../pages/collects/index'
-import regis from '../pages/register/index'
-import pdetail from '../pages/pDetail/index'
 import etcTime from '../pages/extractTime/index'
-import submitForm from '../pages/submitForm/index'
 import web from '../pages/web/index'
-import app_share from '../pages/AppShare/index'
 
 /*H5使用的路由，与小程序无关*/
 Vue.use(Router);
@@ -22,7 +17,7 @@ export default new Router({
     name: 'home',
     component: home,
     alias: '/pages/home/main',
-    meta:{title:'wcs'}
+    meta:{title:'首页'}
   }, {
     path: '/AI',
     name: 'AI',
@@ -41,18 +36,6 @@ export default new Router({
     component: collects,
     alias: '/pages/collects/main',
     meta:{title:'收藏'}
-  },{
-    path: '/register',
-    name: 'register',
-    component: regis,
-    alias: '/pages/register/main',
-    meta:{title:'注册'}
-  },{
-    path: '/pedtail',
-    name: 'pedtail',
-    component: pdetail,
-    alias: '/pages/pDetail/main',
-    meta:{title:'商品详情'}
   },{
     path: '/etcTime',
     name: 'etcTime',
