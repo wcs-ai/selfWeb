@@ -25,13 +25,26 @@ export default {
 
   },
   methods: {
-    
+    load_data(){
+    	this.request({
+    		method:"POST",
+    		url:"http://127.0.0.1:8000/AI/language/extTime",
+    		dataType:'json',
+    		data:{
+    			"word":"今天8点去小树林。"
+    		},
+    		success:(res)=>{
+    			console.log(res);
+    		}
+    	})
+    }
   },
   created () {
 
   },
   mounted () {
      this.showNAV = false;
+     this.load_data();
   }
 }
 </script>

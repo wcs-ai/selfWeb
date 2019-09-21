@@ -12,6 +12,8 @@ import Fly from './utils/ajax'
 import urls from './utils/url_'
 import objItem from './utils/webAndAI'
 
+
+
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
   next();
