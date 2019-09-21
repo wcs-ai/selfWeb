@@ -54,10 +54,13 @@ Vue.use(Vuex);
 Vue.mixin({
   data () {
     return {
-      webList:objItem.webs,
-      AIList:objItem.AIs,
+      webList:'',
+      AIList:'',
       image:urls['img'],
       showNAV:true,
+      vch:700,
+      colors:['#062954','#05172d','#1fc7d1','#5c0a83','#82086f','#822d08','#7f730c','#0c7d16','#7d0c21','#6d950f'],
+      colors2:['#2f7ad6','#37567c','#41eaf4','#9527ca','#c31aa9','#c15221','#b2a31e','#2ba836','#be0d2e','#91c516'],
       //窗口尺寸,设备尺寸
       ww:0,
       wh:0,
@@ -79,8 +82,16 @@ Vue.mixin({
       to_page(url_,show){
         //不关闭当前页的跳转/
         this.showNAV = show || false;
-       
-        //$("#pc-nav").css({display:'none'});
+        if(this.showNAV===false){
+          $("#pc-nav").css({display:'none'});
+          $("#ph-nav").css({display:'none'});
+          if(this.env==='pc'){$("#view-content").css({marginTop:'15px'});}
+        }
+        else{
+          $("#pc-nav").css({display:'block'});
+          $("#ph-nav").css({display:'block'});
+          if(this.env==='pc'){$("#view-content").css({marginTop:'55px'});}
+        }
         this.$router.push('../'+url_);
       },
       navTo(url,idx){
@@ -120,6 +131,9 @@ Vue.mixin({
           return res;
         }
       },
+    alter_navIndex(ord){
+        this.nav_index = ord;
+    },
     refreshPage(){
       // 刷新页面
       window.location.reload([true]);
@@ -210,6 +224,26 @@ Vue.mixin({
       this.sh = window.screen.height;
       this.bt_canvas.w = this.ww;
       this.env = this.ww>768 ? 'pc' : 'ph';
+      this.vch = this.env==='pc' ? (this.sh - 166) : this.sh;
+
+      var cr;
+      objItem.webs.forEach((value,ord)=>{
+        cr = Math.random()*(this.colors.length-1);
+        value['color'] = this.colors[Math.round(cr)];
+      });
+      objItem.AIs.forEach((item,index)=>{
+        cr = Math.random()*(this.colors.length-1);
+        item['color'] = this.colors[Math.round(cr)];
+        item['color2'] = this.colors2[Math.round(cr)];
+        item['ellipse'] = {
+          cx:this.env==='pc' ? 104 : (this.ww*70)/375,
+          cy:this.env==='pc' ? 60 : (this.ww*50)/375,
+          rx:this.env==='pc' ? 65 : (this.ww*60)/375,
+          ry:this.env==='pc' ? 60 : (this.ww*50)/375
+        }
+      });
+      this.webList = objItem.webs;
+      this.AIList = objItem.AIs;
       //DOM元素加载完成后进入绘制事件
       document.addEventListener('DOMContentLoaded',()=>{
         this.dra_bt_nav();

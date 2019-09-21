@@ -1,16 +1,18 @@
 <template>
-  <div id="web-all" @scroll="check_view()">
+  <div id="web-all">
     <ol class="web-article">
-      <li class="web-item" v-for="(web,index) in webList">
-        <div class="left circle"></div>
+      <li class="web-item" v-for="(web,index) in webList" @click="to_article()" :key="index">
+        <div class="left circle" :style="{background:web.color}"></div>
         <div class="content">
-          <p class="shape"></p>
-          <h3 class="title"><p class="cont">{{ web.title }}</p></h3>
-          <div class="text"><p class="cont">{{ web.descript }}</p></div>
-          <p class="time">{{ web.time }}</p>
+          <div class="shape" :style="{background:web.color}">
+            <p class="sj" :style="{borderLeftColor:web.color}"></p>
+          </div>
+          <h3 class="title"><p class="cont" :style="{background:web.color}">{{ web.title }}</p></h3>
+          <div class="text"><p class="cont" :style="{background:web.color}">{{ web.descript }}</p></div>
+          <p class="time" :style="{background:web.color}">{{ web.time }}</p>
         </div>
-        <p class="left-origin"></p>
-        <div class="right circle" @click="frontAnimate(index)">svg</div>
+        <p class="left-origin">svg</p>
+        <div class="right circle" :style="{background:web.color}" @click="frontAnimate(index)">》</div>
       </li>
     </ol>
   </div>
@@ -71,7 +73,7 @@ export default {
     	//检查哪些元素进入视图，加载动画
       var its = document.getElementsByClassName("web-item");
       var wa = document.getElementById("web-all").scrollTop;
-			
+
 			for(var c=this.st_ord,el_arr=[];c<its.length;c++){
       		if(its[c].offsetTop<(this.ch+wa-50)){
       			el_arr.push(c);
@@ -80,7 +82,7 @@ export default {
       		this.start_quee(el_arr);
       	}
       }
-      
+
     },
     start_quee(els){
       //队列动画开始
@@ -90,6 +92,10 @@ export default {
         },index*100);
       });
     },
+    to_article(){
+      var host = window.location.host;
+
+    },
     backAnimate(ord){
 
     }
@@ -98,7 +104,13 @@ export default {
 
   },
   mounted () {
-    this.showNAV = true;
+    if(this.env==='pc'){
+      $("#pc-nav").css({display:'block'});
+      $("#view-content").css({marginTop:'55px'});
+    }
+
+    $(document.body).scroll(this.check_view);
+    this.nav_index = 1;
     if(this.env==='pc'){
       this.ch = this.sh - 170;
     }
@@ -143,7 +155,7 @@ export default {
           height:100%;
           background: @blue2;
           z-index: 120;
-          &:after{
+          >.sj{
             content: '';
             position: absolute;
             height: 0;
@@ -181,6 +193,10 @@ export default {
             background: @blue2;
             border-bottom-left-radius: 15px;
             opacity: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2; //设置行数
+            -webkit-box-orient: vertical;
           }
         }
         >.time{
@@ -205,7 +221,7 @@ export default {
         border: 10px solid @blue1;
         text-align: center;
         line-height:90px;
-        font-size: 16px;
+        font-size: 18px;
         color: white;
       }
       >.left{
@@ -227,6 +243,9 @@ export default {
         left: 15px;
         top: 15px;
         z-index: 50;
+        line-height: 80px;
+        text-align: center;
+        font-size: 16px;
       }
     }
   }
@@ -250,7 +269,7 @@ export default {
             >.shape{
               width: 50/@size;
               height:100%;
-              &:after{
+              >.sj{
                 content: '';
                 position: absolute;
                 height: 0;
@@ -298,14 +317,17 @@ export default {
             -moz-border-radius: 50%;
             border-radius: 50%;
             border: 5/@size solid @blue1;
-            line-height:50/@size;
-            font-size: 16/@size;
+            line-height:67/@size;
+            font-size: 12/@size;
           }
           >.left-origin{
             height: 56/@size;
             width: 56/@size;
             left: 10/@size;
             top: 11/@size;
+            text-align: center;
+            font-size: 14/@size;
+            line-height: 56/@size;
           }
         }
       }

@@ -1,26 +1,22 @@
 <template>
   <div id="AI-all">
       <ul class="ai-list">
-        <li class="ai-item row" @click="to_page('../pages/etcTime/main')">
+        <li class="ai-item row" @click="to_page('../pages/etcTime/main')" v-for="(ai,ab) in AIList" :key="ab">
           <div class="head row-left">
             <svg class="svg">
-              <ellipse class="face_out" style="fill:#1f1d20;cx:104;cy:60;rx:65;ry:60;"/>
-<!--              <ellipse class="face_in" cx="90" cy="60" rx="40" ry="50" style="fill:#053f85;"/>-->
-<!--              <ellipse class="eye_lef" cx="70" cy="40" rx="5" ry="8" style="fill:white;"/>-->
-<!--              <ellipse class="eye_right" cx="100" cy="40" rx="5" ry="8" style="fill:white;"/>-->
-<!--              <ellipse class="mouth" cx="85" cy="90" rx="3" ry="5" style="fill:white;"/>-->
+              <ellipse class="face_out" :style="{fill:ai.color,cx:ai.ellipse.cx,cy:ai.ellipse.cy,rx:ai.ellipse.rx,ry:ai.ellipse.ry}"/>
             </svg>
             <div class="head-in">
               <div class="circle"></div>
               <p class="eye"></p>
-              <div class="top"><p></p></div>
-              <div class="bot"><p></p></div>
+              <div class="top"><p :style="{background:ai.color2}"></p></div>
+              <div class="bot"><p :style="{background:ai.color2}"></p></div>
             </div>
           </div>
-          <div class="content row-left">
-            <h3 class="title">盲目搜索之九拼图</h3>
-            <p class="descript">盲目搜索的运用。</p>
-            <p class="time">2019-11-1</p>
+          <div class="content row-left" :style="{background:ai.color}">
+            <h3 class="title">{{ ai.title }}</h3>
+            <p class="descript">{{ ai.descript }}</p>
+            <p class="time">{{ ai.time }}</p>
           </div>
         </li>
       </ul>
@@ -48,42 +44,6 @@
         var er = document.getElementsByClassName("eye_right")[idx];
         var mh = document.getElementsByClassName("mouth")[idx];
         return [fo,fi,ef,er,mh];
-      },
-      implement(el,ord){
-        var [fo,fi,ef,er,mh] = this.select_el(el);
-
-        switch (ord) {
-          case 0:
-            fo.style.rx = 80;
-            this.implement(el,ord+1);
-            break;
-          case 1:
-            fo.style.ry = 80;
-            break;
-        }
-      },
-      eye_animate(ord){
-        var eye = $(".eye").eq(0);
-        var w,lf;
-
-        switch (ord) {
-          case 0:
-            lf = 35;
-            w = 10 - Math.round(Math.abs(45-lf)*0.2);
-            eye.animate({top:50,left:lf,width:w},300);
-            break;
-          case 1:
-            lf = 20;
-            w = Math.round(Math.abs(45-lf)*0.4);
-            eye.animate({top:60,left:lf,width:w},500);
-            break;
-          case 2:
-            lf = 40;
-            w = Math.round(Math.abs(45-lf)*0.4);
-            eye.animate({top:50,left:lf,width:w},500);
-            break;
-        }
-
       }
     },
     components:{
@@ -98,63 +58,46 @@
     mounted(){
       //this.implement(0,0);
       //this.eye_animate(0);
-      this.showNAV = true;
-      var av = new eye_animate(0,0);
+      if(this.env==='pc'){
+        $("#pc-nav").css({display:'block'});
+        $("#view-content").css({marginTop:'55px'});
+      }
+      this.AIList.forEach((val,index)=>{
+        val['animate'] = new eye_animate(index);
+      });
     }
   }
 
-  function eye_animate(el_ord,ord){
+  var ww = window.innerWidth;
+  function eye_animate(el_ord){
     this.el_index = el_ord;
     this.el = $(".eye").eq(this.el_index);
-    this.implement(ord);
+    this.implement();
   }
   eye_animate.prototype = {
     el:'',
-    implement:function(ord){
-      var w,lf,tp;
-      var ran = Math.round( Math.random()*6);
-      switch (ord) {
-        case 0:
-          lf = 45;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 55;
-          break;
-        case 1:
-          lf = 35;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 50;
-          break;
-        case 2:
-          lf = 20;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 60;
-          break;
-        case 3:
-          lf = 55;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 60;
-          break;
-        case 4:
-          lf = 70;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 50;
-          break;
-        case 5:
-          lf = 20;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 50;
-          break;
-        case 6:
-          lf = 70;
-          w = 10 - Math.round(Math.abs(45-lf)*0.2);
-          tp = 60;
-          break;
+    implement:function(){
+      var w,lf,tp,tran;
+
+      if(ww>768){
+        lf = Math.round(Math.random()*50)+20;
+        tp = Math.round(Math.random()*10)+50;
+        w = 10 - Math.round(Math.abs(45-lf)*0.2);
+        tran = 30 - tp;
       }
+      else{
+        lf = Math.round(Math.random()*40)+10;
+        tp = Math.round(Math.random()*8)+42;
+        w = 8 - Math.round(Math.abs(30-lf)*0.2);
+        tran = 46 - tp;
+      }
+
+      this.el.css({transform:'rotateX('+ tran +'deg)'});
       this.el.animate({top:tp,left:lf,width:w},500);
-      setTimeout(()=>{this.implement(ran)},1000);
+      setTimeout(()=>{this.implement()},1000);
+
     }
   }
-
 
 </script>
 <style lang="less">
@@ -174,7 +117,7 @@
       width: 100%;
       >.ai-item{
         width: 520px;
-        margin: 20px auto;
+        margin: 60px auto;
         >.head{
           width: 20%;
           height: 120px;
@@ -281,6 +224,11 @@
             font-size: 14px;
             color: white;
             position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; //设置行数
+            -webkit-box-orient: vertical;
           }
           >.time{
             position: absolute;
@@ -288,11 +236,12 @@
             height: 25px;
             line-height: 25px;
             font-size: 12px;
+            padding-right: 10px;
            // background: @blue2;
             color: white;
             bottom: 0;
             right: 0;
-            text-align: center;
+            text-align: right;
             &:before{
               content: '';
               position: absolute;
@@ -302,6 +251,95 @@
               border-top: 25px solid transparent;
               top: 0;
               left: -20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 300px) and (max-width: 999px){
+    #AI-all{
+      >.ai-list{
+        >.ai-item{
+          width: 95%;
+          margin: 20/@size auto;
+          >.head{
+            height: 100/@size;
+            >.svg{
+              width: 100%;
+              height: 100/@size;
+            }
+            >.head-in{
+              height: 100/@size;
+              left: 20/@size;
+              >.circle{
+                width: 50/@size;
+                height: 50/@size;
+                top: 25/@size;
+                left: 10/@size;
+              }
+              >.eye{
+                width: 8/@size;
+                height: 8/@size;
+                top: 47px;
+                left: 30px;
+              }
+              >.top{
+                width: 70/@size;
+                height: 35/@size;
+                top:10/@size;
+                left: 0;
+                >p{
+                  height: 70/@size;
+                }
+              }
+              >.bot{
+                width: 60/@size;
+                height: 30/@size;
+                bottom: 10/@size;
+                left:5/@size;
+                >p{
+                  height: 60/@size;
+                }
+              }
+            }
+          }
+          >.content{
+            width: 80%;
+            height: 100/@size;
+            padding: 5/@size 5/@size 5/@size 50/@size;
+            border-top-right-radius: 15/@size;
+            border-bottom-right-radius: 15/@size;
+            >.title{
+              font-size: 14/@size;
+            }
+            >.descript{
+              padding: 5/@size 0;
+              font-size: 14/@size;
+            }
+            >.time{
+              position: absolute;
+              width: 150/@size;
+              height: 25/@size;
+              line-height: 25/@size;
+              font-size: 12/@size;
+              // background: @blue2;
+              color: white;
+              bottom: 0;
+              right: 0;
+              text-align: right;
+              padding-right: 10/@size;
+              &:before{
+                content: '';
+                position: absolute;
+                width:0;
+                height: 0;
+                // border-right: 20px solid @blue2;
+                border-top: 25px solid transparent;
+                top: 0;
+                left: -20px;
+              }
             }
           }
         }
