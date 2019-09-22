@@ -28,7 +28,7 @@ export default {
     load_data(){
     	this.request({
     		method:"POST",
-    		url:"http://127.0.0.1:8000/AI/language/extTime",
+    		url:"http://127.0.0.1:8000/index/",
     		dataType:'json',
     		data:{
     			"word":"今天8点去小树林。"
