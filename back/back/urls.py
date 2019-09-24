@@ -20,5 +20,5 @@ from . import view
 
 urlpatterns = [
 	url(r'^$',view.hello),
-    path('index/',view.extTime),
+    path('extract/time/',view.extTime),
 ]

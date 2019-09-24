@@ -17,7 +17,6 @@
     </ol>
   </div>
 </template>
-
 <script>
 
 import $ from '../../utils/jquery.min'

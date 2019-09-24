@@ -4,7 +4,7 @@
       <div id="head">
         <div class="head-content">
           <h3 class="super">[ super ]</h3>
-          <ul class="banner"><li>最近好友生日：李锦堰</li></ul>
+          <ul class="banner"><li>最近好友生日：</li></ul>
           <h2 class="word">奋斗--辉煌人生,科技--改变世界。</h2>
         </div>
       </div>

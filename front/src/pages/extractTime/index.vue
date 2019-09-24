@@ -2,23 +2,23 @@
   <div id="extTime-all">
     <h3 class="place">输入一句话：</h3>
     <div class="word row">
-    	<input class="row-left" placeholder="我今早9点出的门，晚上才回来。"/>
+    	<input class="row-left" v-model="sentence"/>
     	<p class="row-right">提取</p>
     </div>
     <ol class="result">
     	<li class="first">提取结果：</li>
-    	<li>2019-09-17,9:00</li>
-    	<li>2019-09-17,20:00</li>
+    	<li v-for="(itm,idx) in ts" :key="idx">{{ itm }}</li>
     </ol>
   </div>
 </template>
 
 <script>
-  
+
 export default {
   data () {
     return {
-      
+      sentence:'昨天18点订的房间。',
+      ts:[]
     }
   },
   components: {
@@ -28,13 +28,15 @@ export default {
     load_data(){
     	this.request({
     		method:"POST",
-    		url:"http://127.0.0.1:8000/index/",
+    		url:"http://127.0.0.1:8000/extract/time/",
     		dataType:'json',
     		data:{
-    			"word":"今天8点去小树林。"
+    			"word":this.sentence
     		},
     		success:(res)=>{
-    			console.log(res);
+    			if(res.status==='ok'){
+    			  this.ts = res.data;
+          }
     		}
     	})
     }
@@ -57,7 +59,7 @@ export default {
   @green2:#53e8c4;
   @green3:#66f0cf;
   @size:20rem;
-  
+
   #extTime-all{
   	position: relative;
   	padding-left: 30%;
