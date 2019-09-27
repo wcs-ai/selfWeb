@@ -24,6 +24,8 @@
 
   },
   mounted () {
+    this.alter_navIndex(3);
+    this.alter_nav('block');
     if(this.env==='pc'){
       $("#pc-nav").css({display:'block'});
       $("#view-content").css({marginTop:'55px'});

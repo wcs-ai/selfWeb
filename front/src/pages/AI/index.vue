@@ -58,10 +58,12 @@
     mounted(){
       //this.implement(0,0);
       //this.eye_animate(0);
-      if(this.env==='pc'){
-        $("#pc-nav").css({display:'block'});
-        $("#view-content").css({marginTop:'55px'});
-      }
+      this.alter_navIndex(2);
+      this.alter_nav('block');
+      // if(this.env==='pc'){
+      //   $("#pc-nav").css({display:'block'});
+      //   $("#view-content").css({marginTop:'55px'});
+      // }
       this.AIList.forEach((val,index)=>{
         val['animate'] = new eye_animate(index);
       });

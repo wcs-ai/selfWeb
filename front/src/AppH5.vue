@@ -2,26 +2,26 @@
   <!--将src文件下的pages>home>index.vue中template下的元素拿到这个页面的router-view中
   然后将index.vue中的css部分加入到这个页面的头部中-->
   <div id="app">
-    <div id="pc-nav" v-if="showNAV==true">
+    <div id="pc-nav" :style="{display:d.PCNAV}">
       <div class="content row">
-        <p class="nav-word el-w-5" :class="{here:nav_index==0}" @click="navTo('pages/home/main',0)">首页</p>
-        <p class="nav-word el-w-5" :class="{here:nav_index==1}" @click="navTo('pages/web/main',1)">web</p>
-        <p class="nav-word el-w-5" :class="{here:nav_index==2}" @click="navTo('pages/AI/main',2)">人工智能</p>
-        <p class="nav-word el-w-5" :class="{here:nav_index==3}" @click="navTo('pages/collects/main',3)">收藏</p>
-        <p class="nav-word el-w-5" :class="{here:nav_index==4}" @click="navTo('pages/heart/main',4)">心灵世界</p>
+        <p class="nav-word el-w-5" :class="{here:d.nav_index==0}" @click="navTo('pages/home/main',0)">首页</p>
+        <p class="nav-word el-w-5" :class="{here:d.nav_index==1}" @click="navTo('pages/web/main',1)">web</p>
+        <p class="nav-word el-w-5" :class="{here:d.nav_index==2}" @click="navTo('pages/AI/main',2)">人工智能</p>
+        <p class="nav-word el-w-5" :class="{here:d.nav_index==3}" @click="navTo('pages/collects/main',3)">收藏</p>
+        <p class="nav-word el-w-5" :class="{here:d.nav_index==4}" @click="navTo('pages/heart/main',4)">心灵世界</p>
       </div>
     </div>
     <div id="view-content" :style="{ minHeight:vch+'px' }">
       <router-view></router-view>
     </div>
-    <div id="ph-nav" v-if="showNAV==true">
+    <div id="ph-nav" :style="{display:d.PHNAV}">
       <canvas id="ph-bt-canvas" :width="bt_canvas.w" :height="bt_canvas.h"></canvas>
       <ol class="content">
-        <li class="nav-word el-w-5" :class="{here_style:nav_index==0}" @click="navTo('pages/home/main',0)"><p class="iconfont">&#xe602;</p><span>首页</span></li>
-        <li class="nav-word el-w-5" :class="{here_style:nav_index==1}" @click="navTo('pages/web/main',1)"><p class="iconfont">&#xe643;</p><span>web</span></li>
-        <li class="nav-word el-w-5" :class="{here_style:nav_index==2}" @click="navTo('pages/AI/main',2)"><p class="iconfont">&#xe686;</p><span>人工智能</span></li>
-        <li class="nav-word el-w-5" :class="{here_style:nav_index==3}" @click="navTo('pages/collects/main',3)"><p class="iconfont">&#xe62e;</p><span>收藏</span></li>
-        <li class="nav-word el-w-5" :class="{here_style:nav_index==4}" @click="navTo('pages/heart/main',4)"><p class="iconfont">&#xe742;</p><span>heart</span></li>
+        <li class="nav-word el-w-5" :class="{here_style:d.nav_index==0}" @click="navTo('pages/home/main',0)"><p class="iconfont">&#xe602;</p><span>首页</span></li>
+        <li class="nav-word el-w-5" :class="{here_style:d.nav_index==1}" @click="navTo('pages/web/main',1)"><p class="iconfont">&#xe643;</p><span>web</span></li>
+        <li class="nav-word el-w-5" :class="{here_style:d.nav_index==2}" @click="navTo('pages/AI/main',2)"><p class="iconfont">&#xe686;</p><span>人工智能</span></li>
+        <li class="nav-word el-w-5" :class="{here_style:d.nav_index==3}" @click="navTo('pages/collects/main',3)"><p class="iconfont">&#xe62e;</p><span>收藏</span></li>
+        <li class="nav-word el-w-5" :class="{here_style:d.nav_index==4}" @click="navTo('pages/heart/main',4)"><p class="iconfont">&#xe742;</p><span>heart</span></li>
       </ol>
     </div>
   </div>

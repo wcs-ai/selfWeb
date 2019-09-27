@@ -50,6 +50,13 @@ var browser = {
 };
 var ua = navigator.userAgent.toLowerCase();
 
+var d = {
+  nav_index:0,
+  showNAV:true,
+  PHNAV:'none',
+  PCNAV:'none'
+}
+
 Vue.use(Vuex);
 Vue.mixin({
   data () {
@@ -75,23 +82,23 @@ Vue.mixin({
       },
       router:'/',
       nav_index:0,
-      env:'pc'
+      env:'pc',
+      d:d
     }
   },
   methods: {
       to_page(url_,show){
         //不关闭当前页的跳转/
-        this.showNAV = show || false;
-        if(this.showNAV===false){
-          $("#pc-nav").css({display:'none'});
-          $("#ph-nav").css({display:'none'});
-          if(this.env==='pc'){$("#view-content").css({marginTop:'15px'});}
+        var vv = show || 'none';
+        if(this.env==='pc'){
+          d.PCNAV = vv;
+          if(vv==='none'){$("#view-content").css({marginTop:'15px'});}
+          else{$("#view-content").css({marginTop:'55px'});}
         }
         else{
-          $("#pc-nav").css({display:'block'});
-          $("#ph-nav").css({display:'block'});
-          if(this.env==='pc'){$("#view-content").css({marginTop:'55px'});}
+          d.PHNAV = vv;
         }
+
         this.$router.push('../'+url_);
       },
       navTo(url,idx){
@@ -131,8 +138,17 @@ Vue.mixin({
           return res;
         }
       },
+    alter_nav(val){
+        //改变nav状态
+        if(this.env==='pc'){
+          d.PCNAV = val;
+        }
+        else {
+          d.PHNAV = val;
+        }
+    },
     alter_navIndex(ord){
-        this.nav_index = ord;
+        d.nav_index = ord;
     },
     refreshPage(){
       // 刷新页面

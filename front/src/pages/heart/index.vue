@@ -31,6 +31,7 @@
   },
   mounted () {
     this.alter_navIndex(4);
+    this.alter_nav('block');
     if(this.env==='pc'){
       $("#pc-nav").css({display:'block'});
       $("#view-content").css({marginTop:'55px'});
@@ -79,5 +80,27 @@
       }
     }
 
+  }
+
+  @media only screen and (min-width: 300px) and (max-width: 999px){
+    #heart-all{
+      >.center{
+        width: 100%;
+        margin: 300/@size auto;
+        padding: 10/@size;
+        >.word{
+          font-size: 14/@size;
+          color: @blue1;
+          padding: 15/@size 0;
+        }
+        >.p{
+          >.inp{
+            height: 35/@size;
+            padding: 0 10/@size;
+            font-size: 14/@size;
+          }
+        }
+      }
+    }
   }
 </style>

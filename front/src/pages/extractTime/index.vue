@@ -102,4 +102,41 @@ export default {
   		}
   	}
   }
+
+  @media only screen and (min-width: 300px) and (max-width: 999px){
+    #extTime-all{
+      padding: 20/@size 10/@size;
+      >.place{
+        position: relative;
+        font-size: 16/@size;
+        padding: 15/@size 0;
+      }
+      >.word{
+        width: 100%;
+        >.row-left{
+          width: 80%;
+          height: 30px;
+          font-size: 14px;
+          padding: 0 5px;
+        }
+        >.row-right{
+          width: 20%;
+          font-size: 14/@size;
+          height: 30/@size;
+          line-height: 30/@size;
+          cursor: pointer;
+        }
+      }
+      >.result{
+        position: relative;
+        >li{
+          font-size: 14/@size;
+          margin: 5/@size 0;
+        }
+        >.first{
+          font-size: 16/@size;
+        }
+      }
+    }
+  }
 </style>

@@ -103,10 +103,12 @@ export default {
 
   },
   mounted () {
-    if(this.env==='pc'){
-      $("#pc-nav").css({display:'block'});
-      $("#view-content").css({marginTop:'55px'});
-    }
+    this.alter_navIndex(1);
+    this.alter_nav('block');
+    // if(this.env==='pc'){
+    //   $("#pc-nav").css({display:'block'});
+    //   $("#view-content").css({marginTop:'55px'});
+    // }
 
     $(document.body).scroll(this.check_view);
     this.nav_index = 1;
