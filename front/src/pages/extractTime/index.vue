@@ -3,7 +3,7 @@
     <h3 class="place">输入一句话：</h3>
     <div class="word row">
     	<input class="row-left" v-model="sentence"/>
-    	<p class="row-right">提取</p>
+    	<p class="row-right" @click="load_data()">提取</p>
     </div>
     <ol class="result">
     	<li class="first">提取结果：</li>
@@ -28,14 +28,15 @@ export default {
     load_data(){
     	this.request({
     		method:"POST",
-    		url:"http://127.0.0.1:8000/extract/time/",
+    		url:"/AiApi/etcTime/",
     		dataType:'json',
     		data:{
-    			"word":this.sentence
+    			"sentence":this.sentence
     		},
     		success:(res)=>{
     			if(res.status==='ok'){
-    			  this.ts = res.data;
+    			  this.ts = res.data['times'];
+
           }
     		}
     	})

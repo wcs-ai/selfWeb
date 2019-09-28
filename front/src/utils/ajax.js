@@ -3401,14 +3401,15 @@
 // //     $.ajax(this.info);
 // //   }
 // // };
-
+//接口域名
+var host = 'http://127.0.0.1:8000';
 function Fly(info){
   var obj = {
-    type:info.method,
-    url:info.url,
+    type:info.method || 'POST',
+    url:host+info.url,
     data:info.data,
     header:info.header,
-    dataType:info.dataType,
+    dataType:info.dataType || 'json',
     success:info.success
   };
   $.ajax(obj);

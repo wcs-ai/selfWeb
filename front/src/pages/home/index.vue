@@ -2,10 +2,10 @@
   <!--一些标签不能使用,v-html不能用,不能使用href之类的跳转,不能用router-view,最外层必须用一个div元素包起来-->
   <div id="host-all">
       <div id="head">
+        <h2 class="word">奋斗--辉煌人生,科技--改变世界。</h2>
         <div class="head-content">
           <h3 class="super">[ super ]</h3>
           <ul class="banner"><li>最近好友生日：</li></ul>
-          <h2 class="word">奋斗--辉煌人生,科技--改变世界。</h2>
         </div>
       </div>
       <div id="body">
@@ -71,6 +71,11 @@ export default {
     #head{
       position: relative;
       width: 100%;
+      >.word{
+        position: relative;
+        font-size: 18px;
+        padding: 15px 175px;
+      }
       >.head-content{
         position: relative;
         width: 650px;
@@ -93,11 +98,6 @@ export default {
             color: white;
             font-size: 16px;
           }
-        }
-        >.word{
-          position: relative;
-          font-size: 18px;
-          padding: 15px 0;
         }
       }
     }
@@ -142,6 +142,12 @@ export default {
     #host-all{
       width: 100%;
       #head{
+        >.word{
+          width: 90%;
+          font-size: 16/@size;
+          padding: 10/@size 0;
+          margin: 0 auto;
+        }
         >.head-content{
           width: 90%;
           >.super{
@@ -154,10 +160,6 @@ export default {
               padding: 10/@size;
               font-size: 14/@size;
             }
-          }
-          >.word{
-            font-size: 16/@size;
-            padding: 10/@size 0;
           }
         }
       }
