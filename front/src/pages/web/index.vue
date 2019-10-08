@@ -19,7 +19,7 @@
 </template>
 <script>
 
-import $ from '../../utils/jquery.min'
+//import $ from '../../utils/jquery.min'
 export default {
   data () {
     return {
@@ -169,13 +169,16 @@ export default {
         }
         >.title{
           position: relative;
+          height: 23px;
           >.cont{
-            position: relative;
-            display: inline-block;
+            position: absolute;
+            display: block;
             font-size: 16px;
             color: white;
             padding: 1px 15px;
             left: 0;
+            top: 0;
+            margin: 0;
             background: @blue2;
             border-bottom-left-radius: 15px;
             opacity: 0;
@@ -186,10 +189,11 @@ export default {
           margin-top: 3px;
           >.cont{
             position: relative;
-            display: inline-block;
+            display: block;
             font-size: 14px;
             color: white;
             padding: 1px 15px;
+            width: 55%;
             left: 0;
             background: @blue2;
             border-bottom-left-radius: 15px;

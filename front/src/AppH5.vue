@@ -50,7 +50,6 @@
   @green3:#66f0cf;
   @size:20rem;
 
-  @import "../node_modules/iview/dist/styles/iview.css";
   /******reset********/
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -69,6 +68,7 @@
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
   }
 
   ul,ol{list-style-type: none;}

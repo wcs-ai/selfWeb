@@ -92,6 +92,7 @@ export default {
       text-align: center;
       color: white;
       top: 19px;
+      font-size: 14px;
       right: -4px;
       background: @black3;
       -webkit-transform: rotate(30deg);
@@ -129,7 +130,7 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 300px) and (max-width: 768px) {
+  @media only screen and (min-width: 300px) and (max-width: 999px) {
     .home-art{
       height: 128/@size;
       padding: 15/@size;
@@ -146,6 +147,7 @@ export default {
         line-height: 25/@size;
         top: 19/@size;
         right: -4/@size;
+        width: 100/@size;
         &:before{
           content: '';
           border-right: 40/@size solid @black3;
